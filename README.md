@@ -1,10 +1,12 @@
 # 🩺 GlucoGuard AI — Clinical Diabetes Risk Assessment & Data Curation Platform
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.40%2B-FF4B4B.svg)](https://streamlit.io/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://diabetes-prediction-app-aynx7ttfegbdutzhurqnst.streamlit.app)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4%2B-F7931E.svg)](https://scikit-learn.org/)
 [![Plotly](https://img.shields.io/badge/Plotly-5.18%2B-3F4F75.svg)](https://plotly.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+**🌐 Live Demo:** [https://diabetes-prediction-app-aynx7ttfegbdutzhurqnst.streamlit.app](https://diabetes-prediction-app-aynx7ttfegbdutzhurqnst.streamlit.app)
 
 An end-to-end clinical machine learning application and interactive diagnostic dashboard built for diabetes risk stratification, data curation, multivariate biological imputation, and automated screening.
 
