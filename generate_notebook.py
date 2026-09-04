@@ -1,3 +1,4 @@
+import os
 import nbformat as nbf
 
 nb = nbf.v4.new_notebook()
@@ -267,7 +268,8 @@ print("Pipeline steps:", saved_artifact["model_pipeline"].named_steps.keys())"""
 
 nb.cells = cells
 
-with open("/home/g15/diabetes-prediction-app/diabetes_curation_and_modeling.ipynb", "w") as f:
+base_dir = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(base_dir, "diabetes_curation_and_modeling.ipynb"), "w") as f:
     nbf.write(nb, f)
 
 print("Notebook generated successfully: diabetes_curation_and_modeling.ipynb")

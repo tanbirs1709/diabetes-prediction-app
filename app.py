@@ -111,13 +111,15 @@ st.markdown("""
 # Helper function to load model artifact and data
 @st.cache_resource
 def load_model_and_data():
-    model_path = "/home/g15/diabetes-prediction-app/models/diabetes_pipeline.joblib"
-    raw_data_path = "/home/g15/diabetes-prediction-app/data/diabetes_raw.csv"
-    curated_data_path = "/home/g15/diabetes-prediction-app/data/diabetes_curated.csv"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(base_dir, "models", "diabetes_pipeline.joblib")
+    raw_data_path = os.path.join(base_dir, "data", "diabetes_raw.csv")
+    curated_data_path = os.path.join(base_dir, "data", "diabetes_curated.csv")
+    train_script = os.path.join(base_dir, "train_pipeline.py")
     
     if not os.path.exists(model_path):
         import subprocess
-        subprocess.run([sys.executable, "/home/g15/diabetes-prediction-app/train_pipeline.py"], check=True)
+        subprocess.run([sys.executable, train_script], check=True)
         
     artifact = joblib.load(model_path)
     df_raw = pd.read_csv(raw_data_path)

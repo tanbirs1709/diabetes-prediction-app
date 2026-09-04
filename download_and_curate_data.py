@@ -15,12 +15,17 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report, roc_curve
 import joblib
 
-os.makedirs("/home/g15/diabetes-prediction-app/data", exist_ok=True)
-os.makedirs("/home/g15/diabetes-prediction-app/models", exist_ok=True)
-os.makedirs("/home/g15/diabetes-prediction-app/static", exist_ok=True)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
+os.makedirs(STATIC_DIR, exist_ok=True)
 
 DATA_URL = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-DATA_PATH = "/home/g15/diabetes-prediction-app/data/diabetes.csv"
+DATA_PATH = os.path.join(DATA_DIR, "diabetes.csv")
 
 COLUMNS = [
     "Pregnancies",
@@ -136,8 +141,8 @@ fpr, tpr, thresholds = roc_curve(y_test, y_prob_best)
 # Save the full curated dataset
 df_curated_clean = df_curated.copy()
 # Save raw and curated CSVs for Streamlit app
-df.to_csv("/home/g15/diabetes-prediction-app/data/diabetes_raw.csv", index=False)
-df_curated.to_csv("/home/g15/diabetes-prediction-app/data/diabetes_curated.csv", index=False)
+df.to_csv(os.path.join(DATA_DIR, "diabetes_raw.csv"), index=False)
+df_curated.to_csv(os.path.join(DATA_DIR, "diabetes_curated.csv"), index=False)
 
 # Compute feature medians & statistics for app presets and bounds
 feature_stats = {}
@@ -180,5 +185,5 @@ artifact = {
     }
 }
 
-joblib.dump(artifact, "/home/g15/diabetes-prediction-app/models/diabetes_pipeline.joblib")
-print("\nArtifact saved successfully to /home/g15/diabetes-prediction-app/models/diabetes_pipeline.joblib")
+joblib.dump(artifact, os.path.join(MODELS_DIR, "diabetes_pipeline.joblib"))
+print("\nArtifact saved successfully to", os.path.join(MODELS_DIR, "diabetes_pipeline.joblib"))

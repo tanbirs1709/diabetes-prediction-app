@@ -16,11 +16,15 @@ import joblib
 
 from model_utils import BiologicalZeroImputer, MedicalFeatureEngineering
 
-os.makedirs("/home/g15/diabetes-prediction-app/data", exist_ok=True)
-os.makedirs("/home/g15/diabetes-prediction-app/models", exist_ok=True)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
 
 def train_and_export():
-    raw_path = "/home/g15/diabetes-prediction-app/data/diabetes_raw.csv"
+    raw_path = os.path.join(DATA_DIR, "diabetes_raw.csv")
     if not os.path.exists(raw_path):
         import urllib.request
         DATA_URL = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
@@ -139,7 +143,7 @@ def train_and_export():
     
     knn = KNNImputer(n_neighbors=5)
     df_curated_view[feature_cols] = knn.fit_transform(df_curated_view[feature_cols])
-    df_curated_view.to_csv("/home/g15/diabetes-prediction-app/data/diabetes_curated.csv", index=False)
+    df_curated_view.to_csv(os.path.join(DATA_DIR, "diabetes_curated.csv"), index=False)
 
     # Compute descriptive statistics & reference ranges
     feature_stats = {}
@@ -174,7 +178,7 @@ def train_and_export():
         }
     }
 
-    joblib.dump(artifact, "/home/g15/diabetes-prediction-app/models/diabetes_pipeline.joblib")
+    joblib.dump(artifact, os.path.join(MODELS_DIR, "diabetes_pipeline.joblib"))
     print("Training and Artifact generation complete.")
 
 if __name__ == "__main__":

@@ -9,7 +9,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, classification_report
 import joblib
 
-DATA_PATH = "/home/g15/diabetes-prediction-app/data/diabetes_raw.csv"
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data", "diabetes_raw.csv")
 COLUMNS = ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age", "Outcome"]
 df = pd.read_csv(DATA_PATH)
 
